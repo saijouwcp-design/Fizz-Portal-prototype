@@ -1,0 +1,359 @@
+/* ========================================================
+   Fizz Clubhouse Portal - Core Design System & Tokens
+   こども特化ボランティアサークル Fizz ポータル
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Poppins:wght@500;700;800&display=swap');
+
+:root {
+  /* Brand Color Palette (弾けるソーダ＆温もり) */
+  --fizz-mint: #06D6A0;
+  --fizz-mint-light: #E6FBF5;
+  --fizz-mint-dark: #059669;
+  
+  --fizz-soda: #118AB2;
+  --fizz-soda-light: #E1F4F9;
+  --fizz-soda-dark: #0B5D7A;
+  
+  --fizz-yellow: #FFD166;
+  --fizz-yellow-light: #FFF8E7;
+  --fizz-yellow-dark: #E5A800;
+  
+  --fizz-coral: #EF476F;
+  --fizz-coral-light: #FDE8ED;
+  --fizz-coral-dark: #C92A53;
+  
+  --fizz-purple: #8338EC;
+  --fizz-purple-light: #F3EBFF;
+  
+  --fizz-navy: #073B4C;
+  --fizz-text-dark: #1E293B;
+  --fizz-text-muted: #64748B;
+  --fizz-text-light: #94A3B8;
+  
+  --fizz-bg-cream: #FAF8F5;
+  --fizz-bg-warm: #FFFDF9;
+  --fizz-white: #FFFFFF;
+  
+  /* Typography */
+  --font-main: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-en: 'Poppins', 'Fredoka', sans-serif;
+  --font-pop: 'Fredoka', cursive, sans-serif;
+  
+  /* Shadow Elevation */
+  --shadow-sm: 0 2px 8px rgba(7, 59, 76, 0.06);
+  --shadow-md: 0 6px 16px rgba(7, 59, 76, 0.08), 0 2px 4px rgba(7, 59, 76, 0.04);
+  --shadow-lg: 0 12px 32px rgba(7, 59, 76, 0.12), 0 4px 8px rgba(7, 59, 76, 0.06);
+  --shadow-pop: 0 8px 0 rgba(7, 59, 76, 0.15);
+  --shadow-pop-active: 0 2px 0 rgba(7, 59, 76, 0.15);
+  --shadow-isometric: -12px 16px 28px rgba(7, 59, 76, 0.14), -4px 6px 10px rgba(7, 59, 76, 0.08);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* bouncy */
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: var(--font-main);
+  color: var(--fizz-text-dark);
+  background-color: var(--fizz-bg-cream);
+  font-size: 16px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--fizz-bg-cream);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(6, 214, 160, 0.07) 0%, transparent 25%),
+    radial-gradient(circle at 90% 70%, rgba(255, 209, 102, 0.08) 0%, transparent 30%),
+    radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.05) 0%, transparent 40%),
+    radial-gradient(#CBD5E1 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Floating Soda Bubbles in Background */
+.bg-bubbles-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-bubble {
+  position: absolute;
+  bottom: -40px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(6, 214, 160, 0.15));
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: floatBubble linear infinite;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Main Floors Container with Vertical Scroll Snap */
+.clubhouse-viewport {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  z-index: 10;
+}
+
+/* Custom Scrollbar */
+.clubhouse-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+.clubhouse-viewport::-webkit-scrollbar-track {
+  background: rgba(7, 59, 76, 0.04);
+}
+.clubhouse-viewport::-webkit-scrollbar-thumb {
+  background: var(--fizz-mint);
+  border-radius: var(--radius-pill);
+}
+
+/* Quick Access Cards (Top Right Fixed - QuizKnock Style) */
+.quick-access-panel {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.quick-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: var(--fizz-white);
+  border: 2.5px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--fizz-navy);
+  font-family: var(--font-main);
+  font-weight: 700;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.quick-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--fizz-navy);
+}
+
+.quick-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--fizz-navy);
+}
+
+.quick-card.schedule {
+  background: #FFF2EC;
+}
+.quick-card.schedule:hover {
+  background: #FFE2D4;
+}
+.quick-card.schedule .quick-card-badge {
+  background: #FF5400;
+  color: #FFFFFF;
+}
+
+.quick-card.roster {
+  background: #F4EBFB;
+}
+.quick-card.roster:hover {
+  background: #E8D6F5;
+}
+.quick-card.roster .quick-card-badge {
+  background: var(--fizz-purple);
+  color: #FFFFFF;
+}
+
+.quick-card.docs {
+  background: #E8F4FD;
+}
+.quick-card.docs:hover {
+  background: #D4ECFC;
+}
+.quick-card.docs .quick-card-badge {
+  background: var(--fizz-soda);
+  color: #FFFFFF;
+}
+
+.quick-card.shop {
+  background: #FFF7ED;
+}
+.quick-card.shop:hover {
+  background: #FFEDD5;
+}
+.quick-card.shop .quick-card-badge {
+  background: #F59E0B;
+  color: #FFFFFF;
+}
+
+.quick-card.recruit {
+  background: var(--fizz-yellow-light);
+}
+.quick-card.recruit:hover {
+  background: #FFF3D1;
+}
+
+.quick-card.contact {
+  background: var(--fizz-mint-light);
+}
+.quick-card.contact:hover {
+  background: #D5F7EE;
+}
+
+.quick-card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  font-size: 1.1rem;
+  background: var(--fizz-white);
+  border: 1.5px solid var(--fizz-navy);
+  flex-shrink: 0;
+}
+
+.quick-card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-card-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--fizz-text-muted);
+  line-height: 1.2;
+}
+
+.quick-card-title {
+  font-size: 0.95rem;
+  color: var(--fizz-navy);
+  line-height: 1.3;
+}
+
+/* Sound Toggle Button */
+.sound-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-pill);
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--fizz-navy);
+  z-index: 100;
+  transition: all var(--transition-fast);
+}
+
+.sound-toggle-btn:hover {
+  background: var(--fizz-white);
+  transform: translateY(-2px);
+  box-shadow: 3px 5px 0 var(--fizz-navy);
+}
+
+.sound-toggle-btn.muted {
+  color: var(--fizz-text-muted);
+  border-color: #94A3B8;
+  box-shadow: 2px 2px 0 #94A3B8;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .quick-access-panel {
+    top: 14px;
+    right: 14px;
+    gap: 8px;
+  }
+  .quick-card {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .quick-card-badge {
+    width: 26px;
+    height: 26px;
+    font-size: 0.9rem;
+  }
+  .quick-card-label {
+    display: none;
+  }
+  .quick-card-title {
+    font-size: 0.78rem;
+  }
+  .sound-toggle-btn {
+    bottom: 16px;
+    right: 14px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+}

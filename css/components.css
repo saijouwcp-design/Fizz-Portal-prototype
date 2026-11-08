@@ -1,0 +1,693 @@
+/* ========================================================
+   Fizz Clubhouse - Interactive Components Styles
+   クイズ・実績カウンター・フォーム・ギャラリー・フッター
+   ======================================================== */
+
+/* ========================================================
+   1. こどもなぞなぞ・クイズ (Quiz Component)
+   ======================================================== */
+.quiz-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quiz-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--fizz-soda-light);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--fizz-soda);
+}
+
+.quiz-level-tag {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--fizz-soda-dark);
+}
+
+.quiz-score-badge {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--fizz-navy);
+}
+
+.quiz-question-card {
+  background: var(--fizz-yellow-light);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: 4px 4px 0 var(--fizz-navy);
+  position: relative;
+}
+
+.quiz-q-num {
+  font-family: var(--font-en);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--fizz-coral);
+  margin-bottom: 6px;
+}
+
+.quiz-q-text {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fizz-navy);
+  line-height: 1.5;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 18px;
+  background: var(--fizz-white);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fizz-navy);
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+  background: #EFF6FF;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--fizz-navy);
+}
+
+.quiz-option-btn:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--fizz-navy);
+}
+
+.quiz-opt-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--fizz-bg-cream);
+  border: 1.5px solid var(--fizz-navy);
+  border-radius: 50%;
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Quiz Answer States */
+.quiz-option-btn.is-correct {
+  background: #D1FAE5 !important;
+  border-color: #059669 !important;
+  box-shadow: 3px 3px 0 #059669 !important;
+}
+.quiz-option-btn.is-correct .quiz-opt-letter {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #059669;
+}
+
+.quiz-option-btn.is-wrong {
+  background: #FFE4E6 !important;
+  border-color: #E11D48 !important;
+  box-shadow: 3px 3px 0 #E11D48 !important;
+}
+.quiz-option-btn.is-wrong .quiz-opt-letter {
+  background: #F43F5E;
+  color: #FFFFFF;
+  border-color: #E11D48;
+}
+
+/* Quiz Feedback Box */
+.quiz-feedback {
+  display: none;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--fizz-navy);
+  margin-top: 4px;
+  animation: slideUp 0.3s ease;
+}
+
+.quiz-feedback.is-visible {
+  display: block;
+}
+
+.quiz-feedback.success {
+  background: var(--fizz-mint-light);
+  border-color: var(--fizz-mint-dark);
+}
+
+.quiz-feedback.error {
+  background: var(--fizz-coral-light);
+  border-color: var(--fizz-coral-dark);
+}
+
+.feedback-headline {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feedback-headline.success { color: var(--fizz-mint-dark); }
+.feedback-headline.error { color: var(--fizz-coral-dark); }
+
+.feedback-explanation {
+  font-size: 0.9rem;
+  color: var(--fizz-text-dark);
+  line-height: 1.5;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================
+   2. 実績カウンター (Stats Counter Component)
+   ======================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.stat-item-card {
+  background: var(--fizz-white);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-icon {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.stat-number-wrap {
+  font-family: var(--font-en);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--fizz-soda);
+  line-height: 1.1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+
+.stat-unit {
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--fizz-navy);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--fizz-text-muted);
+  margin-top: 4px;
+}
+
+/* ========================================================
+   3. スライダー・カルーセル (Photo Gallery Carousel)
+   ======================================================== */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--fizz-navy);
+  overflow: hidden;
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+}
+
+.carousel-slide-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #E2E8F0;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 16px;
+  background: linear-gradient(to top, rgba(7, 59, 76, 0.9), transparent);
+  color: var(--fizz-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--fizz-white);
+  border: 2px solid var(--fizz-navy);
+  box-shadow: 2px 2px 0 var(--fizz-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--fizz-navy);
+  z-index: 10;
+  transition: all var(--transition-fast);
+}
+
+.carousel-nav-btn.prev { left: 10px; }
+.carousel-nav-btn.next { right: 10px; }
+
+.carousel-nav-btn:hover {
+  background: var(--fizz-yellow);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: var(--fizz-bg-cream);
+  border-top: 1.5px solid var(--fizz-navy);
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  border: 1.5px solid var(--fizz-navy);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.carousel-dot.active {
+  background: var(--fizz-mint);
+  transform: scale(1.2);
+}
+
+/* ========================================================
+   4. 応募フォーム / お問い合わせ (Forms Component)
+   ======================================================== */
+.fizz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--fizz-navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-required-badge {
+  background: var(--fizz-coral);
+  color: var(--fizz-white);
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--fizz-white);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--fizz-navy);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--fizz-mint);
+  box-shadow: 0 0 0 3px rgba(6, 214, 160, 0.35);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--fizz-yellow);
+  border: 2.5px solid var(--fizz-navy);
+  border-radius: var(--radius-pill);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--fizz-navy);
+  box-shadow: 4px 4px 0 var(--fizz-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.form-submit-btn:hover {
+  background: #FFCA40;
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--fizz-navy);
+}
+
+.form-submit-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--fizz-navy);
+}
+
+/* Form Success Notice */
+.form-success-box {
+  display: none;
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--fizz-mint-light);
+  border: 2px solid var(--fizz-mint-dark);
+  border-radius: var(--radius-md);
+}
+
+.form-success-box.is-visible {
+  display: block;
+  animation: slideUp 0.3s ease;
+}
+
+.form-success-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.form-success-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--fizz-navy);
+  margin-bottom: 8px;
+}
+
+.form-success-text {
+  font-size: 0.92rem;
+  color: var(--fizz-text-dark);
+  line-height: 1.6;
+}
+
+/* ========================================================
+   5. サイトフッター (Clubhouse Footer)
+   ======================================================== */
+.clubhouse-footer {
+  width: 100%;
+  background: var(--fizz-navy);
+  color: var(--fizz-white);
+  padding: 40px 24px 30px;
+  scroll-snap-align: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-top: 4px solid var(--fizz-mint);
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-en);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--fizz-yellow);
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  max-width: 380px;
+  line-height: 1.5;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.footer-nav a {
+  color: #E2E8F0;
+  transition: color var(--transition-fast);
+}
+
+.footer-nav a:hover {
+  color: var(--fizz-mint);
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 0.78rem;
+  color: #64748B;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 900px;
+  padding-top: 16px;
+}
+
+/* ========================================================
+   6. 公式SNSハブ (SNS Hub Component for 1F)
+   ======================================================== */
+.sns-hub-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: var(--font-main);
+}
+
+.sns-intro-hero {
+  background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
+  color: #FFF;
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+}
+
+.sns-hero-badge {
+  display: inline-block;
+  background: var(--fizz-yellow);
+  color: var(--fizz-navy);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 6px;
+}
+
+.sns-hero-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0 0 6px 0;
+  color: #FFF;
+}
+
+.sns-hero-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+.sns-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.sns-card {
+  background: #FFF;
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.sns-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 5px 5px 0 var(--fizz-navy);
+}
+
+.sns-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sns-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #FFF;
+  border: 2px solid var(--fizz-navy);
+  flex-shrink: 0;
+}
+
+.sns-icon-circle.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.sns-icon-circle.twitter { background: #0F1419; }
+.sns-icon-circle.line { background: #06C755; }
+.sns-icon-circle.youtube { background: #FF0000; }
+.sns-icon-circle.note { background: #22C55E; }
+
+.sns-card-meta h4 {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--fizz-navy);
+  margin: 0;
+}
+
+.sns-account-id {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--fizz-text-muted);
+}
+
+.sns-card-desc {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--fizz-text-dark);
+  margin: 0;
+}
+
+.sns-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px dashed #E2E8F0;
+}
+
+.sns-followers-count {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--fizz-text-muted);
+}
+
+.sns-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--fizz-navy);
+  color: #FFF;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+}
+
+.sns-action-link:hover {
+  background: var(--fizz-soda);
+  color: #FFF;
+  transform: translate(-1px, -1px);
+}
+
+.sns-campaign-box {
+  background: var(--fizz-yellow-light);
+  border: 2px dashed #D97706;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: #92400E;
+  line-height: 1.6;
+}
+

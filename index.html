@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fizz【フィズ】| こども特化ボランティアサークル公式ポータル</title>
+  <meta name="description"
+    content="大学生が創る、こども特化ボランティアサークル「Fizz（フィズ）」の公式ポータルサイト。自然体験キャンプ、理科実験教室、絵本の読み聞かせ、学習支援まで、弾ける笑顔を届ける秘密基地（クラブハウス）を探索しよう！">
+  <meta property="og:title" content="Fizz【フィズ】| こども特化ボランティアサークル公式ポータル">
+  <meta property="og:description" content="弾ける笑顔、広がる未来。こども特化ボランティアサークルFizzの公式ポータル。エレベーターで各フロアを巡って、活動やクイズを楽しもう！">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#06D6A0">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&family=Poppins:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/elevator.css">
+  <link rel="stylesheet" href="css/floor.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/attendance.css">
+  <link rel="stylesheet" href="css/roster.css">
+  <link rel="stylesheet" href="css/documents.css">
+  <link rel="stylesheet" href="css/accounting.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/calendar.css">
+  <link rel="stylesheet" href="css/gallery.css">
+</head>
+
+<body>
+
+  <!-- Floating Soda Bubbles Background -->
+  <div class="bg-bubbles-container" aria-hidden="true"></div>
+
+  <!-- ========================================================
+       ELEVATOR CONTROLLER UI (Top Left Fixed - QuizKnock Style)
+       ======================================================== -->
+  <aside class="elevator-panel" aria-label="エレベーターフロア選択">
+    <div class="elevator-header">
+      <div class="elevator-brand">
+        <span class="elevator-logo-icon">🫧</span>
+        <span class="elevator-title">FIZZ LIFT</span>
+      </div>
+      <button type="button" class="elevator-toggle-btn" aria-label="メニュー開閉">▼</button>
+    </div>
+
+    <!-- Digital Floor Screen -->
+    <div class="elevator-display">
+      <div class="current-floor-indicator">
+        <span class="display-floor-text">1F</span>
+        <span class="display-dir-arrow">●</span>
+      </div>
+      <span class="display-status">ONLINE</span>
+    </div>
+
+    <!-- Floor Buttons -->
+    <nav class="elevator-buttons">
+      <button type="button" class="floor-btn" data-floor="4f" id="btn-floor-4f">
+        <span class="floor-btn-num">4F</span>
+        <div class="floor-btn-info">
+          <span class="floor-btn-name">備品・ショップ</span>
+          <span class="floor-btn-sub">Rooftop & Shop</span>
+        </div>
+        <span class="floor-btn-dot"></span>
+      </button>
+
+      <button type="button" class="floor-btn" data-floor="3f" id="btn-floor-3f">
+        <span class="floor-btn-num">3F</span>
+        <div class="floor-btn-info">
+          <span class="floor-btn-name">書類・会計決算</span>
+          <span class="floor-btn-sub">Docs & Treasury</span>
+        </div>
+        <span class="floor-btn-dot"></span>
+      </button>
+
+      <button type="button" class="floor-btn" data-floor="2f" id="btn-floor-2f">
+        <span class="floor-btn-num">2F</span>
+        <div class="floor-btn-info">
+          <span class="floor-btn-name">出欠・カレンダー</span>
+          <span class="floor-btn-sub">Schedule & Attend</span>
+        </div>
+        <span class="floor-btn-dot"></span>
+      </button>
+
+      <button type="button" class="floor-btn active" data-floor="1f" id="btn-floor-1f" aria-current="true">
+        <span class="floor-btn-num">1F</span>
+        <div class="floor-btn-info">
+          <span class="floor-btn-name">エントランス</span>
+          <span class="floor-btn-sub">Entrance & Info</span>
+        </div>
+        <span class="floor-btn-dot"></span>
+      </button>
+
+      <button type="button" class="floor-btn" data-floor="b1f" id="btn-floor-b1f">
+        <span class="floor-btn-num">B1</span>
+        <div class="floor-btn-info">
+          <span class="floor-btn-name">メンバー名簿</span>
+          <span class="floor-btn-sub">Member Roster</span>
+        </div>
+        <span class="floor-btn-dot"></span>
+      </button>
+    </nav>
+
+    <div class="elevator-footer">
+      <span>🔔 CHIME ACTIVE</span>
+    </div>
+  </aside>
+
+  <!-- ========================================================
+       QUICK ACCESS CARDS (Top Right Fixed - QuizKnock Style)
+       ======================================================== -->
+  <aside class="quick-access-panel" aria-label="クイックアクセス">
+    <a href="#4f" class="quick-card shop" id="quickShopBtn">
+      <span class="quick-card-badge">🛍️</span>
+      <div class="quick-card-text">
+        <span class="quick-card-label">CHARITY</span>
+        <span class="quick-card-title">ショップ</span>
+      </div>
+    </a>
+    <a href="#3f" class="quick-card docs" id="quickDocsBtn">
+      <span class="quick-card-badge">📁</span>
+      <div class="quick-card-text">
+        <span class="quick-card-label">FOR MEMBERS</span>
+        <span class="quick-card-title">書類・会計決算</span>
+      </div>
+    </a>
+    <a href="#2f" class="quick-card schedule" id="quickScheduleBtn">
+      <span class="quick-card-badge">📅</span>
+      <div class="quick-card-text">
+        <span class="quick-card-label">FOR MEMBERS</span>
+        <span class="quick-card-title">出欠をとる</span>
+      </div>
+    </a>
+    <a href="#b1f" class="quick-card roster" id="quickRosterBtn">
+      <span class="quick-card-badge">📇</span>
+      <div class="quick-card-text">
+        <span class="quick-card-label">FOR MEMBERS</span>
+        <span class="quick-card-title">メンバー名簿</span>
+      </div>
+    </a>
+  </aside>
+
+  <!-- Sound Mute/Unmute Toggle Button -->
+  <button type="button" class="sound-toggle-btn" aria-label="効果音切り替え">
+    🔊 <span class="sound-label">サウンドON</span>
+  </button>
+
+  <!-- ========================================================
+       MAIN CLUBHOUSE FLOORS VIEWPORT (Scroll-Snap Container)
+       ======================================================== -->
+  <main class="clubhouse-viewport">
+
+    <!-- ----------------------------------------------------
+         4F: Rooftop & Nature (屋上・自然体験フロア)
+         ---------------------------------------------------- -->
+    <section class="clubhouse-floor floor-4f" id="4f">
+      <header class="floor-title-badge">
+        <span class="floor-badge-number">4F</span>
+        <div class="floor-title-info">
+          <h2 class="floor-badge-name">Rooftop & Nature</h2>
+          <span class="floor-badge-subtitle">屋上・大自然アウトドア広場</span>
+        </div>
+      </header>
+
+      <div class="room-stage-wrapper">
+        <div class="room-diarama">
+          <div class="room-scenery"></div>
+          <div class="room-wall-sign">☀️ 青空と太陽のテラス</div>
+
+          <!-- Decorative Clouds -->
+          <div class="room-deco floating-slow" style="top: 25px; right: 28%; font-size: 2.2rem;">☁️</div>
+          <div class="room-deco floating-reverse" style="top: 55px; left: 24%; font-size: 1.8rem;">🌤️</div>
+
+          <!-- Item 1: Tent (Camp) -->
+          <div class="room-item item-tent" data-item="tent" tabindex="0" role="button" aria-label="Fizz自然体験＆サマーキャンプ">
+            <span class="click-hint-badge">CLICK!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Tent Base Shadow -->
+                <ellipse cx="80" cy="125" rx="65" ry="12" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Tent Body -->
+                <polygon points="80,15 15,115 145,115" fill="#FFBE0B" stroke="#073B4C" stroke-width="4"
+                  stroke-linejoin="round" />
+                <!-- Tent Entrance Dark -->
+                <polygon points="80,45 45,115 115,115" fill="#073B4C" />
+                <!-- Tent Flap -->
+                <polygon points="80,45 80,115 125,115" fill="#FF006E" stroke="#073B4C" stroke-width="3"
+                  stroke-linejoin="round" />
+                <!-- Tent Guy Ropes -->
+                <line x1="80" y1="15" x2="10" y2="120" stroke="#073B4C" stroke-width="2.5" stroke-dasharray="4 2" />
+                <line x1="80" y1="15" x2="150" y2="120" stroke="#073B4C" stroke-width="2.5" stroke-dasharray="4 2" />
+                <!-- Top Flag -->
+                <polygon points="80,15 95,22 80,30" fill="#06D6A0" />
+              </svg>
+            </div>
+            <div class="room-tooltip">⛺ 自然体験・サマーキャンプ</div>
+          </div>
+
+          <!-- Item 2: First Aid Box (Safety) -->
+          <div class="room-item item-firstaid" data-item="firstaid" tabindex="0" role="button" aria-label="安心安全への取り組み">
+            <span class="click-hint-badge">CLICK!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 90 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="45" cy="72" rx="36" ry="6" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Box -->
+                <rect x="10" y="25" width="70" height="48" rx="8" fill="#FFFFFF" stroke="#073B4C" stroke-width="3.5" />
+                <!-- Handle -->
+                <path d="M 32 25 L 32 15 Q 32 10 45 10 Q 58 10 58 15 L 58 25" stroke="#073B4C" stroke-width="3.5"
+                  fill="none" />
+                <!-- Red Cross -->
+                <rect x="40" y="36" width="10" height="26" rx="2" fill="#EF476F" />
+                <rect x="32" y="44" width="26" height="10" rx="2" fill="#EF476F" />
+              </svg>
+            </div>
+            <div class="room-tooltip">🧰 安心・安全への取り組み</div>
+          </div>
+
+          <!-- Item 3: Rooftop Official Shop & Charity Kiosk -->
+          <div class="room-item item-rooftop-shop" data-item="rooftop-shop" tabindex="0" role="button"
+            aria-label="Fizzオフィシャルショップ＆チャリティグッズ">
+            <span class="click-hint-badge">SHOP!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 210 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Drop shadow -->
+                <ellipse cx="105" cy="154" rx="90" ry="9" fill="#073B4C" fill-opacity="0.25" />
+
+                <!-- Wood Support Posts -->
+                <line x1="36" y1="52" x2="36" y2="146" stroke="#8D5B4C" stroke-width="6" stroke-linecap="round" />
+                <line x1="174" y1="52" x2="174" y2="146" stroke="#8D5B4C" stroke-width="6" stroke-linecap="round" />
+
+                <!-- Garland Bunting Flags -->
+                <polygon points="40,56 56,56 48,70" fill="#EF476F" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="60,56 76,56 68,70" fill="#FFD166" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="80,56 96,56 88,70" fill="#06D6A0" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="100,56 116,56 108,70" fill="#118AB2" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="120,56 136,56 128,70" fill="#8338EC" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="140,56 156,56 148,70" fill="#FF5400" stroke="#073B4C" stroke-width="1.5" />
+
+                <!-- Counter Table Desk -->
+                <rect x="25" y="96" width="160" height="50" rx="6" fill="#FFEAA7" stroke="#073B4C" stroke-width="3.5" />
+                <!-- Front Planks texture -->
+                <line x1="25" y1="112" x2="185" y2="112" stroke="#D4AC0D" stroke-width="2" />
+                <line x1="25" y1="128" x2="185" y2="128" stroke="#D4AC0D" stroke-width="2" />
+
+                <!-- Merchandise on Counter -->
+                <!-- T-Shirt on small rack -->
+                <g transform="translate(42, 70)">
+                  <path d="M 12 6 L 18 10 Q 24 10 30 6 L 38 12 L 34 20 L 30 18 L 30 38 L 12 38 L 12 18 L 8 20 L 4 12 Z"
+                    fill="#06D6A0" stroke="#073B4C" stroke-width="2" />
+                  <circle cx="21" cy="22" r="4" fill="#FFFFFF" />
+                </g>
+
+                <!-- Thermo Mug -->
+                <rect x="88" y="80" width="16" height="18" rx="3" fill="#E2E8F0" stroke="#073B4C" stroke-width="2" />
+                <path d="M 104 84 Q 109 85 109 90 Q 109 95 104 96" stroke="#EF476F" stroke-width="2" fill="none" />
+
+                <!-- Sticker Basket / Whistle box -->
+                <rect x="118" y="82" width="28" height="15" rx="3" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <text x="132" y="93" font-size="10" text-anchor="middle">🏷️</text>
+
+                <!-- Awning / Canopy Roof (Striped Mint & White) -->
+                <!-- Roof background shadow -->
+                <polygon points="15,46 195,46 182,18 28,18" fill="#073B4C" fill-opacity="0.15" />
+                <!-- Roof Body -->
+                <polygon points="18,48 192,48 180,20 30,20" fill="#06D6A0" stroke="#073B4C" stroke-width="3.5"
+                  stroke-linejoin="round" />
+                <!-- White Stripes on Awning -->
+                <polygon points="50,48 74,48 68,20 48,20" fill="#FFFFFF" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="98,48 122,48 114,20 94,20" fill="#FFFFFF" stroke="#073B4C" stroke-width="1.5" />
+                <polygon points="146,48 170,48 160,20 140,20" fill="#FFFFFF" stroke="#073B4C" stroke-width="1.5" />
+
+                <!-- Scalloped Awning Fringe -->
+                <path
+                  d="M 18 48 Q 28 58 38 48 Q 48 58 58 48 Q 68 58 78 48 Q 88 58 98 48 Q 108 58 118 48 Q 128 58 138 48 Q 148 58 158 48 Q 168 58 178 48 Q 188 58 192 48"
+                  fill="#06D6A0" stroke="#073B4C" stroke-width="2" />
+
+                <!-- Wooden Signboard on top: FIZZ SHOP -->
+                <g transform="translate(68, 4)">
+                  <rect x="0" y="0" width="74" height="22" rx="5" fill="#FFF8E7" stroke="#073B4C" stroke-width="2.5" />
+                  <text x="37" y="15" font-family="'Poppins', sans-serif" font-weight="900" font-size="10"
+                    fill="#073B4C" text-anchor="middle" letter-spacing="1">FIZZ SHOP</text>
+                  <circle cx="6" cy="11" r="2" fill="#8D5B4C" />
+                  <circle cx="68" cy="11" r="2" fill="#8D5B4C" />
+                </g>
+              </svg>
+            </div>
+            <div class="room-tooltip">🛍️ Fizz公式ショップ＆チャリティグッズ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------
+         3F: Documents & Finance (書類管理・企画書・会計決算・スローガン)
+         ---------------------------------------------------- -->
+    <section class="clubhouse-floor floor-3f" id="3f">
+      <header class="floor-title-badge">
+        <span class="floor-badge-number">3F</span>
+        <div class="floor-title-info">
+          <h2 class="floor-badge-name">Documents & Finance</h2>
+          <span class="floor-badge-subtitle">年間スローガン・企画書・会計決算・安全マニュアル</span>
+        </div>
+      </header>
+
+      <div class="room-stage-wrapper">
+        <div class="room-diarama">
+          <div class="room-scenery"></div>
+          <div class="room-wall-sign">📁 書類・会計管理室</div>
+
+          <!-- Item 1: Slogan Frame (Annual Slogan & Core Philosophy) -->
+          <div class="room-item item-slogan-frame" data-item="slogan-frame" tabindex="0" role="button"
+            aria-label="Fizz年間スローガンと活動指針（5つの心得）">
+            <span class="click-hint-badge">理念!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 250 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Drop shadow -->
+                <rect x="10" y="10" width="232" height="122" rx="10" fill="#073B4C" fill-opacity="0.2" />
+                <!-- Outer Gold Frame -->
+                <rect x="6" y="6" width="234" height="124" rx="10" fill="#F1C40F" stroke="#073B4C" stroke-width="4" />
+                <rect x="14" y="14" width="218" height="108" rx="6" fill="#FFFBEB" stroke="#D4AC0D" stroke-width="2" />
+                <!-- Top Ribbon -->
+                <path d="M 60 8 L 186 8 L 176 26 L 70 26 Z" fill="#EF476F" stroke="#073B4C" stroke-width="2" />
+                <text x="123" y="21" font-family="'Poppins', sans-serif" font-weight="800" font-size="9" fill="#FFFFFF"
+                  text-anchor="middle" letter-spacing="1">2026 ANNUAL SLOGAN</text>
+                <!-- Crown / Star Icons -->
+                <text x="32" y="44" font-size="14">👑</text>
+                <text x="204" y="44" font-size="14">✨</text>
+                <!-- Main Slogan Text -->
+                <text x="123" y="54" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="900" font-size="14"
+                  fill="#073B4C" text-anchor="middle">「弾ける笑顔、広がる未来。」</text>
+                <!-- Sub text -->
+                <text x="123" y="74" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="700" font-size="8.5"
+                  fill="#118AB2" text-anchor="middle">〜 こどもの“わくわく”を最高のエネルギーに 〜</text>
+                <!-- 5 Principles mini pill -->
+                <rect x="36" y="86" width="174" height="24" rx="12" fill="#06D6A0" stroke="#073B4C" stroke-width="2" />
+                <text x="123" y="102" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="10"
+                  fill="#FFFFFF" text-anchor="middle">🌟 Fizz 5つの心得・行動指針を読む</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">🌟 2026年間スローガン＆5つの心得</div>
+          </div>
+
+          <!-- Item 2: Document Cabinet (Master Archives & Search) -->
+          <div class="room-item item-doc-cabinet" data-item="doc-cabinet" tabindex="0" role="button"
+            aria-label="Fizz書類管理・企画書＆マニュアル一覧">
+            <span class="click-hint-badge">全書類!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 170 195" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Drop shadow -->
+                <ellipse cx="85" cy="188" rx="72" ry="7" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Cabinet Body -->
+                <rect x="15" y="15" width="140" height="168" rx="8" fill="#F8FAFC" stroke="#073B4C" stroke-width="4" />
+                <!-- Top Header Band -->
+                <rect x="15" y="15" width="140" height="26" rx="8" fill="#118AB2" stroke="#073B4C" stroke-width="3" />
+                <text x="85" y="32" font-family="'Poppins', sans-serif" font-weight="800" font-size="10" fill="#FFFFFF"
+                  text-anchor="middle" letter-spacing="1">ARCHIVES</text>
+                <!-- Shelf Line 1 -->
+                <line x1="15" y1="92" x2="155" y2="92" stroke="#073B4C" stroke-width="3" />
+                <!-- Top Shelf: File Binders -->
+                <!-- Binder 1 (Coral) -->
+                <rect x="25" y="47" width="18" height="42" rx="3" fill="#EF476F" stroke="#073B4C" stroke-width="2" />
+                <circle cx="34" cy="62" r="3" fill="#FFFFFF" />
+                <rect x="28" y="72" width="12" height="12" rx="2" fill="#FFFFFF" fill-opacity="0.8" />
+                <!-- Binder 2 (Yellow) -->
+                <rect x="47" y="47" width="18" height="42" rx="3" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <circle cx="56" cy="62" r="3" fill="#FFFFFF" />
+                <rect x="50" y="72" width="12" height="12" rx="2" fill="#FFFFFF" fill-opacity="0.8" />
+                <!-- Binder 3 (Mint) -->
+                <rect x="69" y="47" width="18" height="42" rx="3" fill="#06D6A0" stroke="#073B4C" stroke-width="2" />
+                <circle cx="78" cy="62" r="3" fill="#FFFFFF" />
+                <rect x="72" y="72" width="12" height="12" rx="2" fill="#FFFFFF" fill-opacity="0.8" />
+                <!-- Binder 4 (Purple) -->
+                <rect x="91" y="47" width="18" height="42" rx="3" fill="#8338EC" stroke="#073B4C" stroke-width="2" />
+                <circle cx="100" cy="62" r="3" fill="#FFFFFF" />
+                <rect x="94" y="72" width="12" height="12" rx="2" fill="#FFFFFF" fill-opacity="0.8" />
+                <!-- Leaning Folder -->
+                <rect x="115" y="52" width="14" height="38" rx="2" transform="rotate(14 115 52)" fill="#3A86FF"
+                  stroke="#073B4C" stroke-width="2" />
+                <!-- Lower Shelf: Drawers -->
+                <rect x="24" y="100" width="122" height="34" rx="4" fill="#FFFFFF" stroke="#073B4C"
+                  stroke-width="2.5" />
+                <rect x="70" y="112" width="30" height="8" rx="3" fill="#CBD5E1" stroke="#073B4C" stroke-width="1.5" />
+                <text x="32" y="122" font-size="12">📂</text>
+
+                <rect x="24" y="140" width="122" height="34" rx="4" fill="#FFFFFF" stroke="#073B4C"
+                  stroke-width="2.5" />
+                <rect x="70" y="152" width="30" height="8" rx="3" fill="#CBD5E1" stroke="#073B4C" stroke-width="1.5" />
+                <text x="32" y="162" font-size="12">📑</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📁 書類管理・企画書＆マニュアル一覧</div>
+          </div>
+
+          <!-- Item 3: Project Drafting Desk (企画書) -->
+          <div class="room-item item-draft-desk" data-item="draft-desk" tabindex="0" role="button"
+            aria-label="企画書（活動企画案・承認済企画）">
+            <span class="click-hint-badge">企画書!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 185 145" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="92" cy="132" rx="78" ry="9" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Desk Surface -->
+                <polygon points="20,55 165,55 150,95 10,95" fill="#FFEAA7" stroke="#073B4C" stroke-width="3" />
+                <!-- Desk Front & Legs -->
+                <rect x="10" y="95" width="140" height="30" fill="#D4BE9B" stroke="#073B4C" stroke-width="3" />
+                <rect x="20" y="125" width="12" height="15" fill="#073B4C" />
+                <rect x="130" y="125" width="12" height="15" fill="#073B4C" />
+                <!-- Project Proposals / Binder on Desk -->
+                <rect x="40" y="60" width="55" height="30" rx="3" fill="#FFFFFF" stroke="#073B4C" stroke-width="2" />
+                <line x1="48" y1="68" x2="85" y2="68" stroke="#EF476F" stroke-width="2" />
+                <line x1="48" y1="74" x2="80" y2="74" stroke="#073B4C" stroke-width="1.5" />
+                <line x1="48" y1="80" x2="72" y2="80" stroke="#073B4C" stroke-width="1.5" />
+                <text x="78" y="85" font-size="12">📑</text>
+                <!-- Pen & Holder -->
+                <circle cx="115" cy="72" r="8" fill="#118AB2" stroke="#073B4C" stroke-width="1.5" />
+                <line x1="115" y1="72" x2="120" y2="58" stroke="#EF476F" stroke-width="3" stroke-linecap="round" />
+                <!-- Desk Lamp -->
+                <path d="M 130 50 Q 140 30 135 20 L 120 25 Z" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <line x1="130" y1="50" x2="135" y2="65" stroke="#073B4C" stroke-width="3" />
+              </svg>
+            </div>
+            <div class="room-tooltip">📑 企画書</div>
+          </div>
+
+          <!-- Item 5: Treasury Safe & Register (会計・決算管理金庫) -->
+          <div class="room-item item-treasury-safe" data-item="treasury-safe" tabindex="0" role="button"
+            aria-label="Fizz会計・決算報告＆経費精算">
+            <span class="click-hint-badge">決算!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 165 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Drop shadow -->
+                <ellipse cx="82" cy="144" rx="70" ry="8" fill="#073B4C" fill-opacity="0.25" />
+
+                <!-- Heavy Safe Box Body -->
+                <rect x="25" y="55" width="115" height="85" rx="8" fill="#0B5D7A" stroke="#073B4C" stroke-width="4" />
+                <!-- Corner Metal Reinforcements -->
+                <rect x="25" y="55" width="14" height="14" rx="2" fill="#118AB2" stroke="#073B4C" stroke-width="2" />
+                <rect x="126" y="55" width="14" height="14" rx="2" fill="#118AB2" stroke="#073B4C" stroke-width="2" />
+                <rect x="25" y="126" width="14" height="14" rx="2" fill="#118AB2" stroke="#073B4C" stroke-width="2" />
+                <rect x="126" y="126" width="14" height="14" rx="2" fill="#118AB2" stroke="#073B4C" stroke-width="2" />
+
+                <!-- Safe Inner Door Plate -->
+                <rect x="36" y="65" width="93" height="65" rx="6" fill="#073B4C" stroke="#118AB2" stroke-width="2" />
+
+                <!-- Safe Combination Dial -->
+                <circle cx="65" cy="97" r="16" fill="#FFD166" stroke="#073B4C" stroke-width="3" />
+                <circle cx="65" cy="97" r="10" fill="#F1C40F" stroke="#073B4C" stroke-width="2" />
+                <circle cx="65" cy="97" r="4" fill="#073B4C" />
+                <!-- Dial tick lines -->
+                <line x1="65" y1="83" x2="65" y2="86" stroke="#073B4C" stroke-width="2" />
+                <line x1="65" y1="108" x2="65" y2="111" stroke="#073B4C" stroke-width="2" />
+                <line x1="51" y1="97" x2="54" y2="97" stroke="#073B4C" stroke-width="2" />
+                <line x1="76" y1="97" x2="79" y2="97" stroke="#073B4C" stroke-width="2" />
+
+                <!-- Safe Door Handle (T-Handle) -->
+                <circle cx="104" cy="97" r="6" fill="#E2E8F0" stroke="#073B4C" stroke-width="2" />
+                <rect x="94" y="94" width="20" height="6" rx="2" fill="#E2E8F0" stroke="#073B4C" stroke-width="2" />
+
+                <!-- Cash Register sitting on top of the safe -->
+                <!-- Base / Drawer -->
+                <rect x="42" y="32" width="70" height="23" rx="4" fill="#FFFBEB" stroke="#073B4C" stroke-width="3" />
+                <rect x="65" y="44" width="24" height="6" rx="2" fill="#CBD5E1" stroke="#073B4C" stroke-width="1.5" />
+
+                <!-- Register Display Screen (Angled) -->
+                <polygon points="52,14 102,14 106,32 48,32" fill="#118AB2" stroke="#073B4C" stroke-width="2.5" />
+                <!-- Green Digital LCD -->
+                <rect x="56" y="18" width="42" height="10" rx="2" fill="#06D6A0" stroke="#073B4C" stroke-width="1.5" />
+                <text x="77" y="26" font-family="'Fredoka', sans-serif" font-weight="700" font-size="7" fill="#073B4C"
+                  text-anchor="middle">¥ 520,000</text>
+
+                <!-- Receipt Paper issuing from top -->
+                <path d="M 92 14 L 92 6 Q 96 4 100 6 L 100 14" fill="#FFFFFF" stroke="#073B4C" stroke-width="1.5" />
+
+                <!-- Gold Coins & Calculator on side -->
+                <!-- Coin 1 -->
+                <ellipse cx="140" cy="138" rx="14" ry="5" fill="#F1C40F" stroke="#073B4C" stroke-width="2" />
+                <!-- Coin 2 -->
+                <ellipse cx="140" cy="133" rx="14" ry="5" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <!-- Coin 3 -->
+                <ellipse cx="140" cy="128" rx="14" ry="5" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <text x="140" y="131" font-family="'Fredoka', sans-serif" font-weight="700" font-size="7" fill="#073B4C"
+                  text-anchor="middle">¥</text>
+
+                <!-- Floating Star Sparkles -->
+                <text x="18" y="50" font-size="14">✨</text>
+                <text x="135" y="45" font-size="12">💰</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">💰 会計・決算報告＆経費精算</div>
+          </div>
+        </div>
+    </section>
+
+    <!-- ----------------------------------------------------
+         2F: Schedule & Meeting (出欠管理・活動カレンダーフロア)
+         ---------------------------------------------------- -->
+    <section class="clubhouse-floor floor-2f" id="2f">
+      <header class="floor-title-badge">
+        <span class="floor-badge-number">2F</span>
+        <div class="floor-title-info">
+          <h2 class="floor-badge-name">Schedule & Meeting</h2>
+          <span class="floor-badge-subtitle">メンバー出欠登録＆ミーティング</span>
+        </div>
+      </header>
+
+      <div class="room-stage-wrapper">
+        <div class="room-diarama">
+          <div class="room-scenery"></div>
+          <div class="room-wall-sign">📅 出欠登録＆ミーティング</div>
+
+          <!-- Item 1: Giant Wall Calendar (Main Attendance System) -->
+          <div class="room-item item-event-calendar" data-item="event-calendar" tabindex="0" role="button"
+            aria-label="イベント出欠管理カレンダー（メンバー専用）">
+            <span class="click-hint-badge">出欠回答!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Frame Shadow -->
+                <rect x="8" y="8" width="264" height="164" rx="10" fill="#073B4C" fill-opacity="0.2" />
+                <!-- Calendar Board Body -->
+                <rect x="5" y="5" width="260" height="160" rx="10" fill="#FFFFFF" stroke="#073B4C" stroke-width="4" />
+                <!-- Calendar Header Bar -->
+                <path d="M 5 15 Q 5 5 15 5 L 255 5 Q 265 5 265 15 L 265 42 L 5 42 Z" fill="#FF5400" stroke="#073B4C"
+                  stroke-width="3" />
+                <circle cx="28" cy="24" r="5" fill="#FFFFFF" />
+                <circle cx="242" cy="24" r="5" fill="#FFFFFF" />
+                <!-- Month Title -->
+                <text x="135" y="29" font-family="'Poppins', sans-serif" font-weight="900" font-size="16" fill="#FFFFFF"
+                  text-anchor="middle">OCTOBER - NOVEMBER 2026</text>
+
+                <!-- Calendar Days of Week Header -->
+                <g font-family="'Poppins', sans-serif" font-weight="800" font-size="9" text-anchor="middle">
+                  <text x="30" y="56" fill="#EF476F">SUN</text>
+                  <text x="65" y="56" fill="#64748B">MON</text>
+                  <text x="100" y="56" fill="#64748B">TUE</text>
+                  <text x="135" y="56" fill="#64748B">WED</text>
+                  <text x="170" y="56" fill="#64748B">THU</text>
+                  <text x="205" y="56" fill="#64748B">FRI</text>
+                  <text x="240" y="56" fill="#3A86FF">SAT</text>
+                </g>
+                <line x1="15" y1="62" x2="255" y2="62" stroke="#CBD5E1" stroke-width="1.5" />
+
+                <!-- Calendar Grid Cells -->
+                <!-- 10/25 Halloween Event Cell Highlight -->
+                <rect x="18" y="70" width="34" height="34" rx="4" fill="#FFEAA7" stroke="#FF5400" stroke-width="2" />
+                <text x="24" y="82" font-family="'Poppins', sans-serif" font-weight="900" font-size="10"
+                  fill="#EF476F">25</text>
+                <text x="35" y="98" font-size="12" text-anchor="middle">🎃</text>
+
+                <!-- 11/01 Autumn Camp Cell Highlight -->
+                <rect x="18" y="110" width="34" height="34" rx="4" fill="#FFEAA7" stroke="#FF5400" stroke-width="2" />
+                <text x="24" y="122" font-family="'Poppins', sans-serif" font-weight="900" font-size="10"
+                  fill="#EF476F">1</text>
+                <text x="35" y="138" font-size="12" text-anchor="middle">🍁</text>
+
+                <!-- 11/07 Science Lab -->
+                <rect x="225" y="70" width="34" height="34" rx="4" fill="#D1FAE5" stroke="#059669" stroke-width="2" />
+                <text x="231" y="82" font-family="'Poppins', sans-serif" font-weight="900" font-size="10"
+                  fill="#3A86FF">7</text>
+                <text x="242" y="98" font-size="12" text-anchor="middle">🧪</text>
+
+                <!-- 11/14 Fizz Cafe -->
+                <rect x="225" y="110" width="34" height="34" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="2" />
+                <text x="231" y="122" font-family="'Poppins', sans-serif" font-weight="900" font-size="10"
+                  fill="#3A86FF">14</text>
+                <text x="242" y="138" font-size="12" text-anchor="middle">✏️</text>
+
+                <!-- Bottom Banner Badge -->
+                <rect x="50" y="148" width="170" height="16" rx="8" fill="#073B4C" />
+                <text x="135" y="160" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="9"
+                  fill="#06D6A0" text-anchor="middle">👉 クリックして出欠・参加登録</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📅 イベント出欠管理カレンダー（クリックして出欠回答）</div>
+          </div>
+
+          <!-- Item 2: Activity Manuals & Recreation Shelf -->
+          <div class="room-item item-bookshelf" data-item="bookshelf" tabindex="0" role="button"
+            aria-label="Fizz活動マニュアル＆レクリエーション集">
+            <span class="click-hint-badge">マニュアル</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 140 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bookshelf Wooden Frame -->
+                <rect x="10" y="10" width="120" height="170" rx="6" fill="#D4BE9B" stroke="#073B4C"
+                  stroke-width="3.5" />
+                <!-- Shelves -->
+                <line x1="10" y1="65" x2="130" y2="65" stroke="#073B4C" stroke-width="3" />
+                <line x1="10" y1="120" x2="130" y2="120" stroke="#073B4C" stroke-width="3" />
+                <!-- Top Row Binders -->
+                <rect x="20" y="24" width="14" height="41" fill="#EF476F" stroke="#073B4C" stroke-width="2" />
+                <rect x="36" y="24" width="14" height="41" fill="#06D6A0" stroke="#073B4C" stroke-width="2" />
+                <rect x="52" y="24" width="16" height="41" fill="#118AB2" stroke="#073B4C" stroke-width="2" />
+                <rect x="70" y="24" width="14" height="41" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <!-- Mid Row Manuals -->
+                <rect x="20" y="78" width="16" height="42" fill="#8338EC" stroke="#073B4C" stroke-width="2" />
+                <rect x="38" y="78" width="14" height="42" fill="#FFBE0B" stroke="#073B4C" stroke-width="2" />
+                <!-- Bottom Row Storage Box -->
+                <rect x="20" y="132" width="100" height="38" rx="4" fill="#FFFFFF" stroke="#073B4C"
+                  stroke-width="2.5" />
+                <text x="70" y="156" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="10"
+                  fill="#073B4C" text-anchor="middle">📁 活動資料BOX</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📚 活動マニュアル・過去レク集</div>
+          </div>
+
+          <!-- Item 3: Meeting Sofa (Meeting Notes) -->
+          <div class="room-item item-sofa" data-item="sofa" tabindex="0" role="button" aria-label="定例ミーティング議事録＆団らんメモ">
+            <span class="click-hint-badge">議事録</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="90" cy="108" rx="75" ry="9" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Sofa Backrest -->
+                <rect x="25" y="25" width="130" height="55" rx="16" fill="#06D6A0" stroke="#073B4C"
+                  stroke-width="3.5" />
+                <!-- Sofa Seat Cushions -->
+                <rect x="20" y="60" width="70" height="35" rx="10" fill="#05B385" stroke="#073B4C" stroke-width="3" />
+                <rect x="90" y="60" width="70" height="35" rx="10" fill="#05B385" stroke="#073B4C" stroke-width="3" />
+                <!-- Table with Note in front -->
+                <polygon points="50,85 130,85 120,110 60,110" fill="#FFEAA7" stroke="#073B4C" stroke-width="2.5" />
+                <rect x="75" y="88" width="30" height="16" rx="2" fill="#FFFFFF" stroke="#073B4C" stroke-width="1.5" />
+                <text x="90" y="99" font-size="8" text-anchor="middle">📝</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">🛋️ ミーティング議事録＆メモ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------
+         1F: Entrance & Lounge (エントランス・総合案内フロア)
+         ---------------------------------------------------- -->
+    <section class="clubhouse-floor floor-1f" id="1f">
+      <header class="floor-title-badge">
+        <span class="floor-badge-number">1F</span>
+        <div class="floor-title-info">
+          <h2 class="floor-badge-name">Entrance & Lounge</h2>
+          <span class="floor-badge-subtitle">Fizzへようこそ！最新情報と活動記録</span>
+        </div>
+      </header>
+
+      <div class="room-stage-wrapper">
+        <div class="room-diarama">
+          <div class="room-scenery"></div>
+          <div class="room-wall-sign">🛎️ 総合受付＆インフォメーション</div>
+
+          <!-- Item 1: Entrance Desk (Welcome & Concept) -->
+          <div class="room-item item-entrance-desk" data-item="entrance-desk" tabindex="0" role="button"
+            aria-label="Fizz Member Login">
+            <span class="click-hint-badge">CLICK!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 170 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="85" cy="118" rx="70" ry="9" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Reception Counter -->
+                <path d="M 20 50 Q 85 40 150 50 L 150 100 Q 85 110 20 100 Z" fill="#FFFFFF" stroke="#073B4C"
+                  stroke-width="3.5" />
+                <!-- Counter Top Rim -->
+                <ellipse cx="85" cy="50" rx="65" ry="12" fill="#FFD166" stroke="#073B4C" stroke-width="3" />
+                <!-- Bell on Counter -->
+                <circle cx="85" cy="46" r="8" fill="#EF476F" stroke="#073B4C" stroke-width="2" />
+                <line x1="85" y1="36" x2="85" y2="40" stroke="#073B4C" stroke-width="2.5" />
+                <!-- FIZZ Logo Sign on Desk Front -->
+                <rect x="50" y="70" width="70" height="24" rx="6" fill="#118AB2" stroke="#073B4C" stroke-width="2" />
+                <text x="85" y="87" font-family="'Poppins', sans-serif" font-weight="900" font-size="12" fill="#FFFFFF"
+                  text-anchor="middle">LOGIN</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">🔑 メンバーログイン</div>
+          </div>
+
+          <!-- Item 2: Notice Board (News & Reports) -->
+          <div class="room-item item-noticeboard" data-item="noticeboard" tabindex="0" role="button"
+            aria-label="最新ニュース・活動速報">
+            <span class="click-hint-badge">NEW!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 230 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cork Board -->
+                <rect x="5" y="5" width="220" height="130" rx="8" fill="#E8D5B5" stroke="#073B4C" stroke-width="3.5" />
+                <!-- Pinned Paper 1 (Event) -->
+                <rect x="18" y="20" width="85" height="100" rx="3" fill="#FFFFFF" stroke="#073B4C" stroke-width="2" />
+                <circle cx="60" cy="24" r="3" fill="#EF476F" />
+                <line x1="28" y1="40" x2="90" y2="40" stroke="#073B4C" stroke-width="2.5" />
+                <line x1="28" y1="52" x2="85" y2="52" stroke="#94A3B8" stroke-width="2" />
+                <line x1="28" y1="62" x2="75" y2="62" stroke="#94A3B8" stroke-width="2" />
+                <!-- Pinned Paper 2 (Report Photo) -->
+                <rect x="115" y="24" width="95" height="92" rx="3" fill="#FFFDF9" stroke="#073B4C" stroke-width="2" />
+                <circle cx="162" cy="28" r="3" fill="#06D6A0" />
+                <rect x="125" y="38" width="75" height="45" rx="2" fill="#E2E8F0" />
+                <text x="162" y="66" font-size="16" text-anchor="middle">📸</text>
+                <line x1="125" y1="94" x2="190" y2="94" stroke="#073B4C" stroke-width="2" />
+              </svg>
+            </div>
+            <div class="room-tooltip">📌 最新ニュース・活動速報</div>
+          </div>
+
+          <!-- Item 3: Stats Counter Display (Metrics) -->
+          <div class="room-item item-counter-display" id="entranceCounters" data-item="counter-display" tabindex="0"
+            role="button" aria-label="活動記録カウンター">
+            <span class="click-hint-badge">実績!</span>
+            <div class="item-artwork">
+              <div
+                style="background: #FFFFFF; border: 3px solid var(--fizz-navy); border-radius: 14px; padding: 12px 14px; box-shadow: 4px 4px 0 var(--fizz-navy); width: 190px;">
+                <div
+                  style="font-size: 0.72rem; font-weight: 800; color: var(--fizz-text-muted); text-transform: uppercase;">
+                  FIZZ IMPACT</div>
+                <div
+                  style="font-family: var(--font-en); font-weight: 900; font-size: 1.6rem; color: var(--fizz-soda); line-height: 1.1; margin: 2px 0;">
+                  <span data-target-count="1420">0</span><span
+                    style="font-size: 0.85rem; font-weight: 700; color: var(--fizz-navy); margin-left: 2px;">名</span>
+                </div>
+                <div style="font-size: 0.75rem; font-weight: 800; color: var(--fizz-navy);">届けたこどもの笑顔</div>
+              </div>
+            </div>
+            <div class="room-tooltip">📊 Fizzの活動実績データ</div>
+          </div>
+
+          <!-- Item 4: Calendar -->
+          <div class="room-item item-calendar" data-item="calendar" tabindex="0" role="button"
+            aria-label="活動カレンダー・年間スケジュール">
+            <span class="click-hint-badge">CLICK!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="50" cy="102" rx="40" ry="6" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Calendar Top Bar -->
+                <rect x="15" y="15" width="70" height="20" rx="4" fill="#EF476F" stroke="#073B4C" stroke-width="2.5" />
+                <circle cx="30" cy="20" r="3" fill="#FFFFFF" />
+                <circle cx="70" cy="20" r="3" fill="#FFFFFF" />
+                <!-- Calendar Body -->
+                <rect x="15" y="32" width="70" height="65" rx="3" fill="#FFFFFF" stroke="#073B4C" stroke-width="2.5" />
+                <!-- Day Number -->
+                <text id="calendarDay" x="50" y="75" font-family="'Poppins', sans-serif" font-weight="900"
+                  font-size="32" fill="#073B4C" text-anchor="middle">
+                  24
+                </text>
+                <text id="calendarStatus" x="50" y="90" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800"
+                  font-size="9" fill="#06D6A0" text-anchor="middle">TODAY</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📅 活動カレンダー・スケジュール</div>
+          </div>
+
+          <!-- Item 5: Official Social Media Stand & Display (公式SNSハブ) -->
+          <div class="room-item item-sns-hub" data-item="sns-hub" tabindex="0" role="button"
+            aria-label="Fizz公式SNS（Instagram・X・LINE・YouTube）">
+            <span class="click-hint-badge">公式SNS!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 145 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Drop shadow -->
+                <ellipse cx="72" cy="132" rx="55" ry="7" fill="#073B4C" fill-opacity="0.25" />
+
+                <!-- Display Stand Base & Pole -->
+                <rect x="52" y="122" width="40" height="10" rx="4" fill="#073B4C" />
+                <rect x="68" y="95" width="8" height="30" fill="#94A3B8" stroke="#073B4C" stroke-width="2" />
+
+                <!-- Smartphone Kiosk Body -->
+                <rect x="30" y="10" width="84" height="105" rx="14" fill="#FFFFFF" stroke="#073B4C"
+                  stroke-width="3.5" />
+                <!-- Inner Screen Display -->
+                <rect x="36" y="20" width="72" height="84" rx="8" fill="#118AB2" />
+
+                <!-- Notch / Speaker -->
+                <rect x="62" y="14" width="20" height="3" rx="1.5" fill="#073B4C" />
+
+                <!-- Screen Header: FIZZ SNS -->
+                <rect x="36" y="20" width="72" height="16" rx="8" fill="#073B4C" />
+                <text x="72" y="32" font-family="'Poppins', sans-serif" font-weight="800" font-size="8" fill="#FFD166"
+                  text-anchor="middle" letter-spacing="1">FIZZ SOCIAL</text>
+
+                <!-- App Icons Grid (4 Main Social Apps) -->
+                <!-- Instagram -->
+                <rect x="42" y="42" width="26" height="24" rx="6" fill="#EF476F" stroke="#FFFFFF" stroke-width="1.5" />
+                <circle cx="55" cy="54" r="5" stroke="#FFFFFF" stroke-width="1.5" fill="none" />
+                <circle cx="62" cy="47" r="1.5" fill="#FFFFFF" />
+
+                <!-- X / Twitter -->
+                <rect x="76" y="42" width="26" height="24" rx="6" fill="#0F1419" stroke="#FFFFFF" stroke-width="1.5" />
+                <text x="89" y="58" font-family="'Poppins', sans-serif" font-weight="900" font-size="12" fill="#FFFFFF"
+                  text-anchor="middle">𝕏</text>
+
+                <!-- LINE -->
+                <rect x="42" y="72" width="26" height="24" rx="6" fill="#06C755" stroke="#FFFFFF" stroke-width="1.5" />
+                <text x="55" y="88" font-size="11" text-anchor="middle">💬</text>
+
+                <!-- YouTube -->
+                <rect x="76" y="72" width="26" height="24" rx="6" fill="#FF0000" stroke="#FFFFFF" stroke-width="1.5" />
+                <polygon points="85,78 95,84 85,90" fill="#FFFFFF" />
+
+                <!-- Floating Heart & Sparkle Bubbles -->
+                <g transform="translate(108, 18)">
+                  <circle cx="10" cy="10" r="12" fill="#EF476F" stroke="#073B4C" stroke-width="2" />
+                  <text x="10" y="14" font-size="11" text-anchor="middle">❤️</text>
+                </g>
+                <text x="12" y="45" font-size="14">✨</text>
+                <text x="118" y="75" font-size="12">👍</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📱 Fizz公式SNS（Instagram / X / LINE / YouTube）</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------
+         B1F: Member Base & Roster (メンバー名簿・サークル控室)
+         ---------------------------------------------------- -->
+    <section class="clubhouse-floor floor-b1f" id="b1f">
+      <header class="floor-title-badge">
+        <span class="floor-badge-number">B1</span>
+        <div class="floor-title-info">
+          <h2 class="floor-badge-name">Member Base & Roster</h2>
+          <span class="floor-badge-subtitle">メンバー名簿＆カテゴリー教材一覧</span>
+        </div>
+      </header>
+
+      <div class="room-stage-wrapper">
+        <div class="room-diarama">
+          <div class="room-scenery"></div>
+          <div class="room-wall-sign">📇 メンバー名簿＆控室</div>
+
+          <!-- Item 1: Giant Member Roster Board (Main Directory) -->
+          <div class="room-item item-member-roster" data-item="member-roster" tabindex="0" role="button"
+            aria-label="Fizzメンバー名簿・プロフィール一覧">
+            <span class="click-hint-badge">名簿を見る!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 270 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Board Body Shadow -->
+                <rect x="8" y="8" width="254" height="164" rx="10" fill="#073B4C" fill-opacity="0.2" />
+                <!-- Board Body -->
+                <rect x="5" y="5" width="250" height="160" rx="10" fill="#FFFFFF" stroke="#073B4C" stroke-width="4" />
+                <!-- Top Header Bar -->
+                <path d="M 5 15 Q 5 5 15 5 L 245 5 Q 255 5 255 15 L 255 40 L 5 40 Z" fill="#8338EC" stroke="#073B4C"
+                  stroke-width="3" />
+                <circle cx="25" cy="22" r="4" fill="#FFFFFF" />
+                <circle cx="235" cy="22" r="4" fill="#FFFFFF" />
+                <!-- Board Title -->
+                <text x="130" y="27" font-family="'Poppins', sans-serif" font-weight="900" font-size="14" fill="#FFFFFF"
+                  text-anchor="middle">FIZZ MEMBER DIRECTORY</text>
+
+                <!-- Member Name Cards Grid Simulation -->
+                <!-- Card 1 (Aoi) -->
+                <rect x="18" y="50" width="68" height="42" rx="4" fill="#E6FBF5" stroke="#06D6A0" stroke-width="1.5" />
+                <circle cx="32" cy="65" r="9" fill="#06D6A0" />
+                <text x="32" y="69" font-size="10" text-anchor="middle">👩‍🏫</text>
+                <text x="46" y="64" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#073B4C">桜井 葵</text>
+                <rect x="46" y="70" width="34" height="12" rx="3" fill="#EF476F" />
+                <text x="63" y="79" font-size="7" font-weight="800" fill="#FFFFFF" text-anchor="middle">代表</text>
+
+                <!-- Card 2 (Kenta) -->
+                <rect x="96" y="50" width="68" height="42" rx="4" fill="#FFF8E7" stroke="#FFD166" stroke-width="1.5" />
+                <circle cx="110" cy="65" r="9" fill="#FFD166" />
+                <text x="110" y="69" font-size="10" text-anchor="middle">👨‍🔬</text>
+                <text x="124" y="64" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#073B4C">佐藤 健太</text>
+                <rect x="124" y="70" width="34" height="12" rx="3" fill="#06D6A0" />
+                <text x="141" y="79" font-size="7" font-weight="800" fill="#073B4C" text-anchor="middle">副代表</text>
+
+                <!-- Card 3 (Yuka) -->
+                <rect x="174" y="50" width="68" height="42" rx="4" fill="#FDE8ED" stroke="#EF476F" stroke-width="1.5" />
+                <circle cx="188" cy="65" r="9" fill="#EF476F" />
+                <text x="188" y="69" font-size="10" text-anchor="middle">👩‍🎨</text>
+                <text x="202" y="64" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#073B4C">加藤 優花</text>
+                <rect x="202" y="70" width="34" height="12" rx="3" fill="#118AB2" />
+                <text x="219" y="79" font-size="7" font-weight="800" fill="#FFFFFF" text-anchor="middle">企画</text>
+
+                <!-- Card 4 (Ren) -->
+                <rect x="18" y="100" width="68" height="42" rx="4" fill="#E1F4F9" stroke="#118AB2" stroke-width="1.5" />
+                <circle cx="32" cy="115" r="9" fill="#118AB2" />
+                <text x="32" y="119" font-size="10" text-anchor="middle">🧗‍♂️</text>
+                <text x="46" y="114" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#073B4C">渡辺 蓮</text>
+                <rect x="46" y="120" width="34" height="12" rx="3" fill="#FFD166" />
+                <text x="63" y="129" font-size="7" font-weight="800" fill="#073B4C" text-anchor="middle">野外</text>
+
+                <!-- Card 5 (Misaki) -->
+                <rect x="96" y="100" width="68" height="42" rx="4" fill="#F3EBFF" stroke="#8338EC" stroke-width="1.5" />
+                <circle cx="110" cy="115" r="9" fill="#8338EC" />
+                <text x="110" y="119" font-size="10" text-anchor="middle">👩‍💼</text>
+                <text x="124" y="114" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#073B4C">伊藤 美咲</text>
+                <rect x="124" y="120" width="34" height="12" rx="3" fill="#073B4C" />
+                <text x="141" y="129" font-size="7" font-weight="800" fill="#FFFFFF" text-anchor="middle">会計</text>
+
+                <!-- Card 6 (Hina) -->
+                <rect x="174" y="100" width="68" height="42" rx="4" fill="#E6FBF5" stroke="#06D6A0"
+                  stroke-width="1.5" />
+                <circle cx="188" cy="115" r="9" fill="#06D6A0" />
+                <text x="188" y="119" font-size="10" text-anchor="middle">👩‍🎓</text>
+                <text x="202" y="114" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#073B4C">高橋 陽菜</text>
+                <rect x="202" y="120" width="34" height="12" rx="3" fill="#8338EC" />
+                <text x="219" y="129" font-size="7" font-weight="800" fill="#FFFFFF" text-anchor="middle">広報</text>
+
+                <!-- Bottom Banner Badge -->
+                <rect x="50" y="150" width="160" height="16" rx="8" fill="#073B4C" />
+                <text x="130" y="162" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="9"
+                  fill="#FFD166" text-anchor="middle">👉 全メンバーを見る・検索する</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📇 Fizzメンバー名簿・プロフィール一覧（クリックで閲覧・検索）</div>
+          </div>
+
+          <!-- Item 2: Organization & Committee Board -->
+          <div class="room-item item-whiteboard" data-item="whiteboard" tabindex="0" role="button"
+            aria-label="サークル組織図＆係分担">
+            <span class="click-hint-badge">組織図</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 170 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Whiteboard Frame -->
+                <rect x="5" y="5" width="160" height="130" rx="8" fill="#F8FAFC" stroke="#073B4C" stroke-width="3.5" />
+                <!-- Board Title Strip -->
+                <rect x="18" y="14" width="134" height="20" rx="4" fill="#073B4C" />
+                <text x="85" y="28" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="10"
+                  fill="#06D6A0" text-anchor="middle">組織図</text>
+                <!-- Org Tree Nodes -->
+                <rect x="45" y="42" width="80" height="20" rx="3" fill="#EF476F" stroke="#073B4C" stroke-width="1.5" />
+                <text x="85" y="56" font-size="9" font-weight="800" fill="#FFFFFF" text-anchor="middle">代表・幹部会</text>
+                <line x1="85" y1="62" x2="85" y2="76" stroke="#073B4C" stroke-width="2" />
+                <line x1="30" y1="76" x2="140" y2="76" stroke="#073B4C" stroke-width="2" />
+                <!-- Branches -->
+                <rect x="12" y="82" width="40" height="24" rx="2" fill="#E6FBF5" stroke="#073B4C" stroke-width="1.2" />
+                <text x="32" y="97" font-size="8" font-weight="800" fill="#073B4C" text-anchor="middle">企画係</text>
+                <rect x="65" y="82" width="40" height="24" rx="2" fill="#FFF8E7" stroke="#073B4C" stroke-width="1.2" />
+                <text x="85" y="97" font-size="8" font-weight="800" fill="#073B4C" text-anchor="middle">野外係</text>
+                <rect x="118" y="82" width="40" height="24" rx="2" fill="#F3EBFF" stroke="#073B4C" stroke-width="1.2" />
+                <text x="138" y="97" font-size="8" font-weight="800" fill="#073B4C" text-anchor="middle">広報係</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📋 組織図</div>
+          </div>
+
+          <!-- Item 3: Photo Gallery (活動フォトギャラリー) -->
+          <div class="room-item item-photo-gallery" data-item="photo-gallery" tabindex="0" role="button"
+            aria-label="📸 活動フォトギャラリー">
+            <span class="click-hint-badge">PHOTO!</span>
+            <div class="item-artwork">
+              <svg viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Drop shadow -->
+                <ellipse cx="80" cy="122" rx="60" ry="7" fill="#073B4C" fill-opacity="0.25" />
+                <!-- Photo Stand Board -->
+                <rect x="15" y="12" width="130" height="100" rx="10" fill="#FFFFFF" stroke="#073B4C"
+                  stroke-width="3.5" />
+                <!-- Top Header / Clip -->
+                <rect x="52" y="6" width="56" height="14" rx="4" fill="#FFD166" stroke="#073B4C" stroke-width="2" />
+                <circle cx="80" cy="13" r="3" fill="#073B4C" />
+                <!-- Picture Frame Inner -->
+                <rect x="25" y="24" width="110" height="74" rx="6" fill="#E1F4F9" stroke="#118AB2" stroke-width="2" />
+                <!-- Sun/Moon in picture -->
+                <circle cx="45" cy="42" r="10" fill="#FFD166" />
+                <!-- Mountains in picture -->
+                <polygon points="25,97 55,60 85,97" fill="#06D6A0" />
+                <polygon points="65,97 100,50 135,97" fill="#059669" />
+                <!-- Camera icon badge in corner -->
+                <circle cx="115" cy="85" r="14" fill="#EF476F" stroke="#073B4C" stroke-width="2" />
+                <text x="115" y="90" font-size="12" text-anchor="middle">📸</text>
+                <!-- Title label text -->
+                <rect x="35" y="102" width="90" height="16" rx="4" fill="#073B4C" />
+                <text x="80" y="113" font-family="'M PLUS Rounded 1c', sans-serif" font-weight="800" font-size="8.5"
+                  fill="#FFFFFF" text-anchor="middle">GALLERY</text>
+              </svg>
+            </div>
+            <div class="room-tooltip">📸 活動フォトギャラリー</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         CLUBHOUSE FOOTER
+         ======================================================== -->
+    <footer class="clubhouse-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>🫧</span>
+            <span>Fizz Clubhouse</span>
+          </div>
+          <p class="footer-desc">こども特化ボランティアサークル「Fizz（フィズ）」<br>「弾ける笑顔、広がる未来」を合言葉に、大学生とこどもたちが共に成長する居場所をつくっています。</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="フッターリンク">
+          <a href="#4f" onclick="document.getElementById('4f').scrollIntoView({behavior:'smooth'}); return false;">4F
+            アウトドア</a>
+          <a href="#3f" onclick="document.getElementById('3f').scrollIntoView({behavior:'smooth'}); return false;">3F
+            実験・クイズ</a>
+          <a href="#2f" onclick="document.getElementById('2f').scrollIntoView({behavior:'smooth'}); return false;">2F
+            プレイルーム</a>
+          <a href="#1f" onclick="document.getElementById('1f').scrollIntoView({behavior:'smooth'}); return false;">1F
+            エントランス</a>
+          <a href="#b1f" onclick="document.getElementById('b1f').scrollIntoView({behavior:'smooth'}); return false;">B1F
+            秘密基地</a>
+        </nav>
+      </div>
+
+      <div class="footer-copyright">
+        © 2026 こども特化ボランティアサークル Fizz (All Rights Reserved).
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========================================================
+       MODAL DIALOG CONTAINER
+       ======================================================== -->
+  <div class="modal-backdrop" id="clubhouseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-window">
+      <header class="modal-header">
+        <div class="modal-header-title">
+          <span class="modal-tag-badge" id="modalBadge">INFO</span>
+          <h3 class="modal-title-text" id="modalTitle">モーダルタイトル</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="閉じる">✕</button>
+      </header>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamic injected content -->
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn-secondary"
+          onclick="document.getElementById('modalCloseBtn').click();">とじる</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Supabase Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

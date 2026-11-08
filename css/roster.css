@@ -1,0 +1,307 @@
+/* ========================================================
+   Fizz Clubhouse - Member Roster Styles
+   B1F メンバー名簿・プロフィールカード専用スタイル
+   ======================================================== */
+
+.roster-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Toolbar & Search Bar */
+.roster-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--fizz-bg-cream);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.roster-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fizz-white);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  box-shadow: 2px 2px 0 var(--fizz-navy);
+}
+
+.roster-search-box .search-icon {
+  font-size: 1.1rem;
+}
+
+.roster-search-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  color: var(--fizz-navy);
+  outline: none;
+}
+
+/* Filter Tabs */
+.roster-filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.roster-tab {
+  padding: 6px 14px;
+  background: var(--fizz-white);
+  border: 1.5px solid var(--fizz-navy);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--fizz-navy);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.roster-tab:hover {
+  background: #FFF9E6;
+  transform: translateY(-1px);
+}
+
+.roster-tab.active {
+  background: var(--fizz-navy);
+  color: var(--fizz-white);
+  box-shadow: 2px 2px 0 var(--fizz-mint);
+}
+
+.roster-action-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Add Member Form Panel */
+.add-member-panel {
+  background: var(--fizz-yellow-light);
+  border: 2.5px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: 4px 4px 0 var(--fizz-navy);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Members Grid */
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+}
+
+/* Individual Member Card */
+.member-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--fizz-white);
+  border: 2px solid var(--fizz-navy);
+  border-radius: var(--radius-md);
+  box-shadow: 3px 3px 0 var(--fizz-navy);
+  padding: 16px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+}
+
+.member-id-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-en, 'Poppins', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--fizz-text-muted);
+  background: var(--fizz-bg-cream);
+  border: 1px solid var(--fizz-navy);
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.member-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 5px 6px 0 var(--fizz-navy);
+}
+
+.member-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.member-avatar-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid var(--fizz-navy);
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0 var(--fizz-navy);
+}
+
+.member-title-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Role Badges */
+.member-role-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  line-height: 1.2;
+}
+
+.member-role-badge.exec {
+  background: var(--fizz-coral-light);
+  color: var(--fizz-coral-dark);
+  border: 1px solid var(--fizz-coral);
+}
+
+.member-role-badge.leader {
+  background: var(--fizz-mint-light);
+  color: var(--fizz-mint-dark);
+  border: 1px solid var(--fizz-mint);
+}
+
+.member-role-badge.staff {
+  background: var(--fizz-soda-light);
+  color: var(--fizz-soda-dark);
+  border: 1px solid var(--fizz-soda);
+}
+
+.member-role-badge.rookie {
+  background: var(--fizz-yellow-light);
+  color: var(--fizz-yellow-dark);
+  border: 1px solid var(--fizz-yellow);
+}
+
+.member-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--fizz-navy);
+  line-height: 1.2;
+}
+
+.member-nickname {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--fizz-text-muted);
+  margin-left: 4px;
+}
+
+.member-univ-grade {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--fizz-text-muted);
+}
+
+.member-grade-pill {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.7rem;
+  color: var(--fizz-navy);
+}
+
+/* Skills & Tags */
+.member-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.member-skill-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--fizz-bg-cream);
+  border: 1px solid #CBD5E1;
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: var(--fizz-navy);
+}
+
+/* Member Message Bubble */
+.member-message-box {
+  background: #F8FAFC;
+  border: 1.5px dashed #CBD5E1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: auto;
+}
+
+.member-message-text {
+  font-size: 0.8rem;
+  color: var(--fizz-text-dark);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.member-contact-footer {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #E2E8F0;
+  font-size: 0.72rem;
+  color: var(--fizz-text-muted);
+}
+
+/* Empty State */
+.roster-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--fizz-bg-cream);
+  border: 2px dashed #CBD5E1;
+  border-radius: var(--radius-md);
+}
+
+.member-section {
+  margin: 24px 0;
+}
+
+.member-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #dddddd;
+}
+
+.member-card h3 {
+  margin-top: 0;
+}
