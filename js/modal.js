@@ -283,14 +283,9 @@ export const MODAL_DATA = {
     isRoster: true
   },
   'whiteboard': {
-    badge: 'B1F Organization',
-    title: '📋 メンバー名簿＆サークル組織図',
-    isRoster: true
-  },
-  'joinpost': {
-    badge: 'B1F Member Register',
-    title: '📇 メンバー名簿へのプロフィール登録・更新',
-    isRoster: true
+    badge: 'Coming Soon',
+    title: '🚧 準備中',
+    content: COMING_SOON_CONTENT
   },
   'consultdesk': {
     badge: 'B1F Contact & Request',
