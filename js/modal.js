@@ -11,48 +11,42 @@ import { AccountingSystem } from './accounting.js';
 import { RooftopShop } from './shop.js';
 import { supabaseClient } from './supabase.js';
 
+const COMING_SOON_CONTENT = `
+  <div style="
+    text-align:center;
+    padding:24px;
+  ">
+    <div style="font-size:4rem;">
+      🚧
+    </div>
+
+    <h3>準備中</h3>
+
+    <p>
+      このコンテンツは現在準備中です。<br>
+      今後アップデート予定です。
+    </p>
+  </div>
+`;
+
 export const MODAL_DATA = {
   // 4F Rooftop & Nature
-  'rooftop-shop': {
-    badge: '4F Official Store',
-    title: '🛍️ Fizzオフィシャルショップ＆チャリティグッズ',
-    isShop: true
-  },
   'tent': {
-    badge: '4F Rooftop',
-    title: '⛺ Fizz自然体験 & サマーキャンプ',
-    content: `
-      <div style="margin-bottom: 16px;">
-        <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" alt="キャンプ" style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; border: 2px solid var(--fizz-navy); box-shadow: 3px 3px 0 var(--fizz-navy);">
-      </div>
-      <h4 class="modal-section-title">大自然のなかで「できた！」を体験</h4>
-      <p style="margin-bottom: 12px;">Fizzのサマーキャンプは、小学生から中学生までのこどもたちと、大学生ボランティアが一緒に1泊2日〜2泊3日で自然と触れ合う大人気企画です。</p>
-      <div style="background: var(--fizz-mint-light); border-left: 4px solid var(--fizz-mint); padding: 12px 16px; border-radius: 6px; margin-bottom: 16px;">
-        <ul style="padding-left: 18px; font-weight: 700; color: var(--fizz-navy);">
-          <li>🔥 火起こし体験＆みんなで作る手作りカレー</li>
-          <li>🌲 木の葉や小枝を使ったネイチャークラフト</li>
-          <li>🛶 清流での川遊びと生き物観察ツアー</li>
-        </ul>
-      </div>
-      <p style="font-size: 0.9rem; color: var(--fizz-text-muted);">大学生ボランティアがこどもたち2〜3名につき1名体制でマンツーマンに近い安全管理を行っています。</p>
-    `
+    badge: 'Coming Soon',
+    title: '🚧 準備中',
+    content: COMING_SOON_CONTENT
   },
 
-  'campfire': {
-    badge: '4F Outdoor',
-    title: '🔥 こどもと創る防災キャンプ体験',
-    content: `
-      <div style="margin-bottom: 16px;">
-        <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80" alt="たき火" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; border: 2px solid var(--fizz-navy); box-shadow: 3px 3px 0 var(--fizz-navy);">
-      </div>
-      <h4 class="modal-section-title">「あそび」を通じて身につける生きる力</h4>
-      <p style="margin-bottom: 12px;">災害時にも役立つアウトドアスキルを、楽しくゲーム感覚で学ぶワークショップです。</p>
-      <ul style="padding-left: 20px; line-height: 1.8; margin-bottom: 14px;">
-        <li>📰 <strong>新聞紙スリッパ＆防寒ポンチョ作り</strong></li>
-        <li>🍚 <strong>ポリ袋で炊くホカホカご飯体験</strong>（パッククッキング）</li>
-        <li>🔦 <strong>ペットボトルランタンの光の実験</strong></li>
-      </ul>
-    `
+  'tent': {
+    badge: 'Coming Soon',
+    title: '🚧 準備中',
+    content: COMING_SOON_CONTENT
+  },
+
+  'tent': {
+    badge: 'Coming Soon',
+    title: '🚧 準備中',
+    content: COMING_SOON_CONTENT
   },
 
   // 3F Documents & Archives (書類管理・企画書・マニュアル・スローガン)
