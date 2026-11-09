@@ -86,25 +86,10 @@ export const MODAL_DATA = {
     title: '📅 活動カレンダー＆イベント出欠管理（メンバー専用）',
     isAttendance: true
   },
-
   'bookshelf': {
-    badge: '2F Manuals & Library',
-    title: '📚 Fizz活動マニュアル＆過去レクリエーション集',
-    content: `
-      <h4 class="modal-section-title">メンバー必見！活動の知恵袋アーカイブ</h4>
-      <p style="margin-bottom: 14px;">歴代の先輩ボランティアがまとめた、こどもたちとの関わり方のコツや、アイスブレイクゲームのルール集です。</p>
-      
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="padding: 12px; background: var(--fizz-mint-light); border: 2px solid var(--fizz-navy); border-radius: 8px;">
-          <strong style="color: var(--fizz-navy);">📖『こどもとの距離をグッと縮めるアイスブレイク10選』</strong>
-          <p style="font-size: 0.85rem; color: var(--fizz-text-dark); margin-top: 3px;">初対面の緊張をほぐす猛獣狩りゲーム、進化じゃんけんなどの実践手引書。</p>
-        </div>
-        <div style="padding: 12px; background: var(--fizz-yellow-light); border: 2px solid var(--fizz-navy); border-radius: 8px;">
-          <strong style="color: var(--fizz-navy);">🛡️『安全管理ハンドブック（熱中症・アレルギー・迷子対応）』</strong>
-          <p style="font-size: 0.85rem; color: var(--fizz-text-dark); margin-top: 3px;">現場で何か起きた時のエスカレーション手順と応急処置マニュアル。</p>
-        </div>
-      </div>
-    `
+    badge: 'Coming Soon',
+    title: '🚧 準備中',
+    content: COMING_SOON_CONTENT
   },
   'sofa': {
     badge: '2F Meeting Notes',
@@ -613,7 +598,7 @@ export class ModalManager {
       </p>
 
       <p>
-        会員番号: ${currentId}
+        背番号: ${currentId}
       </p>
 
       <button
@@ -706,7 +691,7 @@ export class ModalManager {
         if (error || !data) {
 
           result.innerHTML =
-            '<span style="color:red;">会員番号が見つかりません</span>';
+            '<span style="color:red;">背番号が見つかりません</span>';
 
           return;
 
@@ -974,7 +959,7 @@ export class ModalManager {
       container.innerHTML = `
         <div class="fizz-gallery-container">
           <div class="gallery-header-bar">
-            <span>✨ Fizz活動の思い出アルバム</span>
+            <span>✨ Fizzの思い出アルバム</span>
             <span class="gallery-count-badge">全 ${photos.length} 枚</span>
           </div>
 

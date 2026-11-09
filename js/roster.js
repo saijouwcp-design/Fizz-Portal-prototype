@@ -12,14 +12,14 @@ const DEFAULT_MEMBERS = [
     name: '桜井 葵',
     kana: 'さくらい あおい',
     nickname: 'あおちゃん',
-    role: 'サークル代表 / 全体統括',
+    role: '仮データ',
     roleTag: 'exec', // exec, leader, staff, rookie
     university: '東都大学 文学部',
     grade: '3年',
     avatar: '👩‍🏫',
     avatarBg: '#E6FBF5',
     skills: ['自然体験キャンプ', '絵本読み聞かせ', '救急救命'],
-    message: 'こどもたちと一緒に思いっきり笑える居場所をつくりたいです！活動についての質問はいつでも気軽に声かけてね。',
+    message: '仮データとして残してあります',
     contact: 'LINE: aoi_sakurai / 部室在室: 火・木放課後'
   }
 ];
