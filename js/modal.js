@@ -156,7 +156,7 @@ export const MODAL_DATA = {
                 <span class="sns-account-id">@Fizz_Volunteer</span>
               </div>
             </div>
-            <p class="sns-card-desc">学生ボランティア募集速報、イベント開催情報、ミーティングの様子などをリアルタイム発信。</p>
+            <p class="sns-card-desc">準備中</p>
             <div class="sns-card-footer">
               <span class="sns-followers-count">フォロワー 2,120人</span>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="sns-action-link">
@@ -174,7 +174,7 @@ export const MODAL_DATA = {
                 <span class="sns-account-id">@fizz_clubhouse</span>
               </div>
             </div>
-            <p class="sns-card-desc">活動見学・参加相談や、子ども向けイベントの一般予約を1対1トークで受付中！</p>
+            <p class="sns-card-desc">準備中</p>
             <div class="sns-card-footer">
               <span class="sns-followers-count">友だち 890人</span>
               <a href="https://line.me" target="_blank" rel="noopener noreferrer" class="sns-action-link">
@@ -189,10 +189,10 @@ export const MODAL_DATA = {
               <div class="sns-icon-circle youtube">▶️</div>
               <div class="sns-card-meta">
                 <h4>YouTube</h4>
-                <span class="sns-account-id">Fizzこどもあそびチャンネル</span>
+                <span class="sns-account-id">Fizzチャンネル</span>
               </div>
             </div>
-            <p class="sns-card-desc">おうちでできる理科実験動画や、アイスブレイク手遊び歌、キャンプのドキュメンタリーを公開中。</p>
+            <p class="sns-card-desc">準備中</p>
             <div class="sns-card-footer">
               <span class="sns-followers-count">登録者 650人</span>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="sns-action-link">
@@ -210,7 +210,7 @@ export const MODAL_DATA = {
                 <span class="sns-account-id">Fizz公式 活動マガジン</span>
               </div>
             </div>
-            <p class="sns-card-desc">学生ボランティアの熱い想いや、先輩たちの体験談、子どもの主体性を伸ばす関わり方のコラム。</p>
+            <p class="sns-card-desc">準備中</p>
             <div class="sns-card-footer">
               <span class="sns-followers-count">記事 45本</span>
               <a href="https://note.com" target="_blank" rel="noopener noreferrer" class="sns-action-link">
@@ -222,7 +222,7 @@ export const MODAL_DATA = {
 
         <div class="sns-campaign-box">
           <strong>📢 ハッシュタグ投稿キャンペーン実施中！</strong><br>
-          「#Fizzボランティア」「#弾ける笑顔」をつけてInstagramやXに投稿してくれた写真は、公式アカウントでピックアップ紹介させていただきます！
+          「#Fizz」をつけてInstagramやXに投稿してくれた写真は、公式アカウントでピックアップ紹介させていただきます！
         </div>
       </div>
     `
@@ -287,11 +287,6 @@ export const MODAL_DATA = {
     title: '🚧 準備中',
     content: COMING_SOON_CONTENT
   },
-  'consultdesk': {
-    badge: 'B1F Contact & Request',
-    title: '💼 メンバー相談・活動依頼・備品窓口',
-    isContactForm: true
-  }
 };
 
 export class ModalManager {
