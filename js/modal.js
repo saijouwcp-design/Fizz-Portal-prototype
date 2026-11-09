@@ -31,10 +31,10 @@ const COMING_SOON_CONTENT = `
 
 export const MODAL_DATA = {
   // 4F Rooftop & Nature
-  'tent': {
-    badge: 'Coming Soon',
-    title: '🚧 準備中',
-    content: COMING_SOON_CONTENT
+  'rooftop-shop': {
+    badge: '4F Official Store',
+    title: '🛍️ Fizzオフィシャルショップ＆チャリティグッズ',
+    isShop: true
   },
 
   'tent': {
@@ -43,7 +43,7 @@ export const MODAL_DATA = {
     content: COMING_SOON_CONTENT
   },
 
-  'tent': {
+  'firstaid': {
     badge: 'Coming Soon',
     title: '🚧 準備中',
     content: COMING_SOON_CONTENT
